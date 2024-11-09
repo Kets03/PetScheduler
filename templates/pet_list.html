@@ -1,0 +1,31 @@
+<!-- care/templates/care/pet_list.html -->
+{% extends './base.html' %}
+
+{% block content %}
+<h2>Pets</h2>
+<a href="{% url 'pet_create' %}" class="btn btn-primary mb-3">Add New Pet</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Breed</th>
+            <th>Age</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pet in pets %}
+        <tr>
+            <td>{{ pet.name }}</td>
+            <td>{{ pet.breed }}</td>
+            <td>{{ pet.age }}</td>
+            <td>
+                <a href="{% url 'pet_detail' pet.id %}" class="btn btn-info btn-sm">View</a>
+                <a href="{% url 'pet_update' pet.id %}" class="btn btn-warning btn-sm">Edit</a>
+                <a href="{% url 'pet_delete' pet.id %}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

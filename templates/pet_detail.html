@@ -1,0 +1,34 @@
+<!-- care/templates/care/pet_detail.html -->
+{% extends './base.html' %}
+
+{% block content %}
+<h2>{{ pet.name }}'s Details</h2>
+<p><strong>Breed:</strong> {{ pet.breed }}</p>
+<p><strong>Age:</strong> {{ pet.age }}</p>
+<a href="{% url 'task_create' pet.id %}" class="btn btn-primary mb-3">Add Task</a>
+
+<h3>Tasks</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Task Type</th>
+            <th>Date</th>
+            <th>Completed</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for task in tasks %}
+        <tr>
+            <td>{{ task.task_type }}</td>
+            <td>{{ task.date }}</td>
+            <td>{{ task.completed }}</td>
+            <td>
+                <a href="{% url 'task_update' task.id %}" class="btn btn-warning btn-sm">Edit</a>
+                <a href="{% url 'task_delete' task.id %}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
