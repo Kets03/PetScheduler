@@ -10,7 +10,7 @@ class Pet(models.Model):
         return self.name
 
 class TaskType(models.Model):
-    type_name = models.CharField(max_length=50)  # e.g., Feeding, Grooming, etc.
+    type_name = models.CharField(max_length=50)  
 
     def __str__(self):
         return self.type_name
