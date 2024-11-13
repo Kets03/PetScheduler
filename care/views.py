@@ -3,8 +3,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Pet, Task
 from .forms import PetForm, TaskForm
 
-def home_redirect(request):
-    return redirect('pet_list')
+def get_started(request):
+    return render(request, 'get_started.html')
 
 def pet_list(request):
     pets = Pet.objects.all()
@@ -72,3 +72,10 @@ def task_delete(request, pk):
     pet_id = task.pet.id
     task.delete()
     return redirect('pet_detail', pk=pet_id)
+
+def mark_task_completed(request, task_id):
+    task = get_object_or_404(Task, id=task_id)
+    if request.method == 'POST':
+        task.completed = True
+        task.save()
+    return redirect('pet_detail', pk=task.pet.id)

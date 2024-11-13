@@ -11,5 +11,6 @@ urlpatterns = [
     path('pets/<int:pet_id>/tasks/new/', views.task_create, name='task_create'),
     path('tasks/<int:pk>/edit/', views.task_update, name='task_update'),
     path('tasks/<int:pk>/delete/', views.task_delete, name='task_delete'),
+    path('task/<int:task_id>/mark-completed/', views.mark_task_completed, name='mark_task_completed'),
     path('', lambda request: redirect('pet_list')),  
 ]

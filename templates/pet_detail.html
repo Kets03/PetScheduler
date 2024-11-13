@@ -1,40 +1,62 @@
-<!-- care/templates/care/pet_detail.html -->
 {% extends './base.html' %}
 
 {% block content %}
-<h2>{{ pet.name }}'s Details</h2>
-<p><strong>Breed:</strong> {{ pet.breed }}</p>
-<p><strong>Age:</strong> {{ pet.age }}</p>
-{% if pet.photo %}
-    <img src="{{ pet.photo.url }}" alt="Photo of {{ pet.name }}" style="width: 200px; height: auto;">
-{% else %}
-    <p>No photo available.</p>
-{% endif %}
-<br>
-<a href="{% url 'task_create' pet.id %}" class="btn btn-primary mb-3 mt-4">Add Task</a>
+<div class="row">
+    <!-- Pet Details Card (Left Side) -->
+    <div class="col-md-4">
+        <div class="card" style="background-color: #eecfb6; padding: 20px; border-radius: 10px; width: 320px;">
+            <h2>{{ pet.name }}'s Details</h2>
+            <p><strong>Breed:</strong> {{ pet.breed }}</p>
+            <p><strong>Species:</strong> {{ pet.species }}</p>
+            <p><strong>Age:</strong> {{ pet.age }}</p>
+            {% if pet.photo %}
+                <img src="{{ pet.photo.url }}" alt="Photo of {{ pet.name }}" style="width: 250px; height: auto;">
+            {% else %}
+                <p>No photo available.</p>
+            {% endif %}
+        </div>
+    </div>
 
-<h3>Tasks</h3>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Task Type</th>
-            <th>Date</th>
-            <th>Completed</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for task in tasks %}
-        <tr>
-            <td>{{ task.task_type }}</td>
-            <td>{{ task.date }}</td>
-            <td>{{ task.completed }}</td>
-            <td>
-                <a href="{% url 'task_update' task.id %}" class="btn btn-warning btn-sm">Edit</a>
-                <a href="{% url 'task_delete' task.id %}" class="btn btn-danger btn-sm">Delete</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+    <!-- Tasks Card (Right Side) -->
+    <div class="col-md-5">
+        <div class="card" style="background-color: #eecfb6; padding: 20px; border-radius: 10px; width: 700px;">
+            <h3>Tasks</h3>
+            <a href="{% url 'task_create' pet.id %}" class="btn btn-primary mb-2 mt-2" style="width: 100px;">Add Task</a>
+            <table class="table table-striped" border="5">
+                <thead>
+                    <tr>
+                        <th>Task Type</th>
+                        <th>Date</th>
+                        <th>Completed</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in tasks %}
+                    <tr>
+                        <td>{{ task.task_type }}</td>
+                        <td>{{ task.date }}</td>
+                        <td>
+                            {% if task.completed %}
+                                Yes
+                            {% else %}
+                                No
+                                <!-- "Mark as Completed" button only appears if the task is not completed -->
+                                <form method="post" action="{% url 'mark_task_completed' task.id %}" style="display:inline;">
+                                    {% csrf_token %}
+                                    <input type="checkbox" onclick="this.form.submit()" class="ml-2">
+                                </form>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{% url 'task_update' task.id %}" class="btn btn-sm mt-2">Edit  </a><br>
+                            <a href="{% url 'task_delete' task.id %}" class="btn btn-sm mt-2">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 {% endblock %}

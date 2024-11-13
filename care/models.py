@@ -1,9 +1,27 @@
 from django.db import models
 # care/models.py
 class Pet(models.Model):
+    DOG = 'dog'
+    CAT = 'cat'
+    BIRD = 'bird'
+    FISH = 'fish'
+    SNAKE ='snake'
+    SPECIES_CHOICES = [
+        (DOG, 'Dog'),
+        (CAT, 'Cat'),
+        (BIRD, 'Bird'),
+        (FISH, 'Fish'),
+        (SNAKE, 'Snake')
+    ]
     name = models.CharField(max_length=100)
     breed = models.CharField(max_length=100, blank=True, null=True)
     age = models.IntegerField()
+    species = models.CharField(
+        max_length=100,
+        choices=SPECIES_CHOICES,  # Adding choices restricts to the specified options
+        blank=True,
+        null=True
+    )    
     photo = models.ImageField(upload_to='pet_photos/', blank=True, null=True)
 
     def __str__(self):

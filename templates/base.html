@@ -1,14 +1,90 @@
-<!-- care/templates/care/base.html -->
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pet Care Scheduler</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2)),
+            url("{% static 'images/pawprints.png' %}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        .navbar {
+            background-color: rgb(98, 34, 8);
+            /* Light brown color */
+        }
+
+        table {
+            background-color: #ae6021;
+            /* Darker table background */
+            color: #f0f0f0;
+            /* Light text color */
+            border-color: #bb9678;
+        }
+
+        /* Table header background for contrast */
+        th {
+            background-color: rgb(98, 34, 8);
+            /* Darker header background */
+            color: #fff;
+            /* White text */
+        }
+
+        /* Table row colors */
+        tr:nth-child(even) {
+            background-color: #6f3606;
+            /* Cool navy blue */
+            color: #fff;
+        }
+
+        tr:nth-child(odd) {
+            color: #fff;
+        }
+
+        /* Button styles */
+        .btn {
+            background-color: #764e0a;
+            /* Darker buttons */
+            color: #fff;
+            /* White text */
+            border: none;
+            width: 70px;
+        }
+
+        .btn:hover {
+            background-color: #555;
+            /* Darker shade on hover */
+        }
+
+        /* Link text color */
+        a {
+            color: #f0f0f0;
+            /* Light text for links */
+        }
+
+        a:hover {
+            color: #fff;
+            /* White on hover */
+        }
+
+        /* Optional: Add a slightly darker shadow for the table */
+        table.table-striped {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+    </style>
 </head>
+
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg">
         <a class="navbar-brand" href="{% url 'pet_list' %}">Pet Care Scheduler</a>
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
@@ -20,4 +96,5 @@
         {% block content %}{% endblock %}
     </div>
 </body>
+
 </html>
