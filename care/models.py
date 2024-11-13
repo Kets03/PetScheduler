@@ -1,5 +1,4 @@
 from django.db import models
-# care/models.py
 class Pet(models.Model):
     DOG = 'dog'
     CAT = 'cat'
@@ -18,7 +17,7 @@ class Pet(models.Model):
     age = models.IntegerField()
     species = models.CharField(
         max_length=100,
-        choices=SPECIES_CHOICES,  # Adding choices restricts to the specified options
+        choices=SPECIES_CHOICES,  
         blank=True,
         null=True
     )    

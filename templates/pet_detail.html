@@ -2,7 +2,6 @@
 
 {% block content %}
 <div class="row">
-    <!-- Pet Details Card (Left Side) -->
     <div class="col-md-4">
         <div class="card" style="background-color: #eecfb6; padding: 20px; border-radius: 10px; width: 320px;">
             <h2>{{ pet.name }}'s Details</h2>
@@ -17,7 +16,6 @@
         </div>
     </div>
 
-    <!-- Tasks Card (Right Side) -->
     <div class="col-md-5">
         <div class="card" style="background-color: #eecfb6; padding: 20px; border-radius: 10px; width: 700px;">
             <h3>Tasks</h3>
@@ -41,7 +39,6 @@
                                 Yes
                             {% else %}
                                 No
-                                <!-- "Mark as Completed" button only appears if the task is not completed -->
                                 <form method="post" action="{% url 'mark_task_completed' task.id %}" style="display:inline;">
                                     {% csrf_token %}
                                     <input type="checkbox" onclick="this.form.submit()" class="ml-2">

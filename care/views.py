@@ -1,4 +1,3 @@
-# care/views.py
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Pet, Task
 from .forms import PetForm, TaskForm
@@ -41,7 +40,6 @@ def pet_delete(request, pk):
     pet.delete()
     return redirect('pet_list')
 
-# Task CRUD
 def task_create(request, pet_id):
     pet = get_object_or_404(Pet, id=pet_id)
     if request.method == 'POST':

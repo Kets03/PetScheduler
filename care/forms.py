@@ -12,5 +12,5 @@ class TaskForm(forms.ModelForm):
         model = Task
         fields = ['task_type', 'date', 'notes']
         widgets = {
-            'date': DateTimeInput(attrs={'type': 'datetime-local'}),  # Adds a datetime-local widget
+            'date': DateTimeInput(attrs={'type': 'datetime-local'}),  
         }
