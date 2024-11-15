@@ -27,7 +27,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 SECRET_KEY = 'django-insecure-^r52m2!fh3@e^^ynjje&p-am8t2ntxok97deikvwv!uys186%('
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['petscheduler-ga2v.onrender.com','localhost']
 
