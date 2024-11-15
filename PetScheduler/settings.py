@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-^r52m2!fh3@e^^ynjje&p-am8t2ntxok97deikvwv!uys186%(
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['care.onrender.com', 'localhost']
+ALLOWED_HOSTS = ['care.onrender.com','petscheduler.onrender.com' 'localhost']
 
 
 
