@@ -6,10 +6,9 @@ def get_started(request):
     return render(request, 'get_started.html')
 
 def pet_list(request):
-    species = request.GET.get('species', '')  # Get species from query string
+    species = request.GET.get('species', '') 
     pets = Pet.objects.filter(species=species) if species else Pet.objects.all()
 
-    # Annotate each pet with completed and pending task counts
     pet_data = []
     for pet in pets:
         completed_tasks = Task.objects.filter(pet=pet, completed=True).count()

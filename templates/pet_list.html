@@ -6,7 +6,7 @@
         <div class="card" style="background-color: #eecfb6; padding: 20px; border-radius: 10px; width: 1000px;">
             <h2 style="color: rgb(143, 78, 44);"><b>Pets</b></h2>
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <!-- Filter Form -->
+                
                 <form method="get" action="" class="d-flex">
                     <select name="species" class="form-select" style="width: 150px;">
                         <option value="">All Species</option>
@@ -17,8 +17,6 @@
                     </select>
                     <button type="submit" class="btn btn-secondary ms-2">Filter</button>
                 </form>
-
-                <!-- Add Pet Button -->
                 <a href="{% url 'pet_create' %}" class="btn btn-primary" style="width: 100px;">New Pet</a>
             </div>
 
