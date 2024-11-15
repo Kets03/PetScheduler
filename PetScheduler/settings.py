@@ -22,7 +22,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 SECRET_KEY = 'django-insecure-^r52m2!fh3@e^^ynjje&p-am8t2ntxok97deikvwv!uys186%('
