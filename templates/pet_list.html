@@ -2,10 +2,26 @@
 
 {% block content %}
 <div class="row justify-content-center mt-2">
-    <div class="col-md-9">
-        <div class="card" style="background-color: #eecfb6; padding: 20px; border-radius: 10px; width: 900px;">
+    <div class="col-md-10">
+        <div class="card" style="background-color: #eecfb6; padding: 20px; border-radius: 10px; width: 1000px;">
             <h2 style="color: rgb(143, 78, 44);"><b>Pets</b></h2>
-            <a href="{% url 'pet_create' %}" class="btn btn-primary mb-3" style="width: 100px;">New Pet</a>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <!-- Filter Form -->
+                <form method="get" action="" class="d-flex">
+                    <select name="species" class="form-select" style="width: 150px;">
+                        <option value="">All Species</option>
+                        <option value="Dog" {% if selected_species == "Dog" %}selected{% endif %}>Dogs</option>
+                        <option value="Cat" {% if selected_species == "Cat" %}selected{% endif %}>Cats</option>
+                        <option value="Fish" {% if selected_species == "Fish" %}selected{% endif %}>Fish</option>
+                        <option value="Snake" {% if selected_species == "Snake" %}selected{% endif %}>Snake</option>
+                    </select>
+                    <button type="submit" class="btn btn-secondary ms-2">Filter</button>
+                </form>
+
+                <!-- Add Pet Button -->
+                <a href="{% url 'pet_create' %}" class="btn btn-primary" style="width: 100px;">New Pet</a>
+            </div>
+
             <table class="table table-striped text-center align-middle" border="5">
                 <thead>
                     <tr>
@@ -13,27 +29,36 @@
                         <th>Name</th>
                         <th>Breed</th>
                         <th>Age</th>
+                        <th>Completed Tasks</th>
+                        <th>Pending Tasks</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for pet in pets %}
+                    {% for entry in pet_data %}
                     <tr>
                         <td>
-                            {% if pet.photo %}
-                                <img src="{{ pet.photo.url }}" alt="Photo of {{ pet.name }}" style="width: 100px; height: auto; border-radius: 5px;">
+                            {% if entry.pet.photo %}
+                            <img src="{{ entry.pet.photo.url }}" alt="Photo of {{ entry.pet.name }}"
+                                style="width: 100px; height: auto; border-radius: 5px;">
                             {% else %}
-                                <p>No photo</p>
+                            <p>No photo</p>
                             {% endif %}
                         </td>
-                        <td>{{ pet.name }}</td>
-                        <td>{{ pet.breed }}</td>
-                        <td>{{ pet.age }}</td>
+                        <td>{{ entry.pet.name }}</td>
+                        <td>{{ entry.pet.breed }}</td>
+                        <td>{{ entry.pet.age }}</td>
+                        <td>{{ entry.completed_tasks }}</td>
+                        <td>{{ entry.pending_tasks }}</td>
                         <td>
-                            <a href="{% url 'pet_detail' pet.id %}" class="btn btn-info btn-sm">View</a>
-                            <a href="{% url 'pet_update' pet.id %}" class="btn btn-warning btn-sm">Edit</a>
-                            <a href="{% url 'pet_delete' pet.id %}" class="btn btn-danger btn-sm">Delete</a>
+                            <a href="{% url 'pet_detail' entry.pet.id %}" class="btn btn-info btn-sm">View</a>
+                            <a href="{% url 'pet_update' entry.pet.id %}" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="{% url 'pet_delete' entry.pet.id %}" class="btn btn-danger btn-sm">Delete</a>
                         </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="7">No pets found for the selected species.</td>
                     </tr>
                     {% endfor %}
                 </tbody>

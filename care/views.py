@@ -6,8 +6,25 @@ def get_started(request):
     return render(request, 'get_started.html')
 
 def pet_list(request):
-    pets = Pet.objects.all()
-    return render(request, 'pet_list.html', {'pets': pets})
+    species = request.GET.get('species', '')  # Get species from query string
+    pets = Pet.objects.filter(species=species) if species else Pet.objects.all()
+
+    # Annotate each pet with completed and pending task counts
+    pet_data = []
+    for pet in pets:
+        completed_tasks = Task.objects.filter(pet=pet, completed=True).count()
+        pending_tasks = Task.objects.filter(pet=pet, completed=False).count()
+        pet_data.append({
+            'pet': pet,
+            'completed_tasks': completed_tasks,
+            'pending_tasks': pending_tasks,
+        })
+
+    context = {
+        'pet_data': pet_data,
+        'selected_species': species,
+    }
+    return render(request, 'pet_list.html', context)
 
 def pet_detail(request, pk):
     pet = get_object_or_404(Pet, pk=pk)

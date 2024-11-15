@@ -1,10 +1,10 @@
 from django.db import models
 class Pet(models.Model):
-    DOG = 'dog'
-    CAT = 'cat'
-    BIRD = 'bird'
-    FISH = 'fish'
-    SNAKE ='snake'
+    DOG = 'Dog'
+    CAT = 'Cat'
+    BIRD = 'Bird'
+    FISH = 'Fish'
+    SNAKE ='Snake'
     SPECIES_CHOICES = [
         (DOG, 'Dog'),
         (CAT, 'Cat'),
